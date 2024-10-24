@@ -23,4 +23,4 @@ def log_execution_time(func):
 def print_result(num):
     print(my_sort(num))
 
-print_result([random.randint(-100, 100) for _ in range(100)])
+print_result([random.randint(-100, 100) for _ in range(100000)])
