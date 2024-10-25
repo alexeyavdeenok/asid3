@@ -61,7 +61,7 @@ def visualize_sort(func):
         def visualize_swap(i, j):
             draw_bars(screen, scaled_array, bar_width, color_positions=[i, j])
             # Уменьшаем задержку в зависимости от количества элементов
-            delay = max(0.01, 1.0 / num_elements)  # Задержка не менее 0.01 секунды
+            delay = max(0.05, 2.0 / num_elements)  # Задержка не менее 0.01 секунды
             time.sleep(delay)
 
         kwargs['visualize_swap'] = visualize_swap
@@ -129,10 +129,10 @@ def sort_list(array, key, cmp, first, last, visualize_swap):
 # Пример использования
 if __name__ == "__main__":
     # Задаем количество элементов в массиве
-    num_elements = 200# Изменяйте количество элементов как вам нужно
+    num_elements = 300# Изменяйте количество элементов как вам нужно
     array = [_ for _ in range(num_elements)]  # Генерация массива
     random.shuffle(array)
     my_sort(array, visualize=True)
 
     # Запуск сортировки без визуализации
-    # my_sort(array, visualize=False)
+    # my_sort(array, visualize=False
