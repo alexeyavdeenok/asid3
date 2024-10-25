@@ -1,7 +1,7 @@
 import random
-import matplotlib.pyplot as plt
 import time
 from functools import wraps
+import matplotlib.pyplot as plt
 
 
 def visualize_sort(func):
@@ -55,20 +55,18 @@ def my_sort(array, reverse=False, key=lambda x: x, cmp=None, visualize_swap=None
             y_keyed = key(y)
             if x_keyed < y_keyed:
                 return -1
-            elif x_keyed > y_keyed:
+            if x_keyed > y_keyed:
                 return 1
-            else:
-                return 0
+            return 0
     elif cmp is None and reverse:
         def cmp(x, y):
             x_keyed = key(x)
             y_keyed = key(y)
             if x_keyed > y_keyed:
                 return -1
-            elif x_keyed < y_keyed:
+            if x_keyed < y_keyed:
                 return 1
-            else:
-                return 0
+            return 0
 
     sort_list(array, key, cmp, 0, len(array) - 1, visualize_swap)
     return array
@@ -77,33 +75,19 @@ def my_sort(array, reverse=False, key=lambda x: x, cmp=None, visualize_swap=None
 def sort_list(array, key, cmp, first, last, visualize_swap):
     if first >= last:
         return
-    else:
-        q = random.choice(array[first:last + 1])  # Опорный элемент
-        i = first
-        j = last
-        while i <= j:
-            while cmp(array[i], q) < 0:
-                i += 1
-            while cmp(array[j], q) > 0:
-                j -= 1
-            if i <= j:
-                if visualize_swap:
-                    visualize_swap(i, j)  # Визуализируем обмен
-                array[i], array[j] = array[j], array[i]
-                i += 1
-                j -= 1
-        sort_list(array, key, cmp, first, j, visualize_swap)
-        sort_list(array, key, cmp, i, last, visualize_swap)
-
-
-# Пример использования
-if __name__ == "__main__":
-    array1 = [_ for _ in range(200)]
-    random.shuffle(array1)  # Перемешиваем массив
-    print("Исходный массив:", array1)
-
-    # Вызов с визуализацией
-    sorted_array_with_visualize = my_sort(array1, reverse=True, visualize=True)
-    print("Отсортированный массив (с визуализацией):", sorted_array_with_visualize)
-
-
+    q = random.choice(array[first:last + 1])  # Опорный элемент
+    i = first
+    j = last
+    while i <= j:
+        while cmp(array[i], q) < 0:
+            i += 1
+        while cmp(array[j], q) > 0:
+            j -= 1
+        if i <= j:
+            if visualize_swap:
+                visualize_swap(i, j)  # Визуализируем обмен
+            array[i], array[j] = array[j], array[i]
+            i += 1
+            j -= 1
+    sort_list(array, key, cmp, first, j, visualize_swap)
+    sort_list(array, key, cmp, i, last, visualize_swap)

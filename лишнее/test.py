@@ -76,6 +76,7 @@
 #
 # # Отображение графика
 # plt.show()
+import os
 def encode_string(s):
     """Кодирует строку в числовое значение для алфавитной сортировки."""
     # Кодируем строку в число, основанное на ASCII-кодах символов с весом для каждой позиции
@@ -101,5 +102,15 @@ encoded_strings.sort()
 # Извлекаем строки в отсортированном алфавитном порядке
 sorted_strings = [decode_number(val, strings) for val, _ in encoded_strings]
 
-print("Закодированные значения:", [val for val, _ in encoded_strings])
-print("Отсортированные строки:", sorted_strings)
+def read_list_from_file(file_path, element_type):
+    """Читает массив из файла, приводя элементы к указанному типу."""
+    if not os.path.isfile(file_path):
+        raise FileNotFoundError(f"Файл {file_path} не найден.")
+    with open(file_path, 'r') as file:
+        if element_type == 'int':
+            try:
+                mas = list(map(int, file.read().split()))
+                return mas
+            except ValueError:
+                return
+        return file.read().split()
